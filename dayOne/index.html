@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Nature Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="82" class="key">
+      <kbd>R</kbd>
+      <span class="sound">rain</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">dove</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">falcon</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">gull</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">hawk</span>
+    </div>
+    <div data-key="77" class="key">
+      <kbd>M</kbd>
+      <span class="sound">merlin</span>
+    </div>
+    <div data-key="79" class="key">
+      <kbd>O</kbd>
+      <span class="sound">owl</span>
+    </div>
+    <div data-key="80" class="key">
+      <kbd>P</kbd>
+      <span class="sound">peacock</span>
+    </div>
+  </div>
+
+  <audio data-key="82" src="sounds/birdinrain.wav"></audio>
+  <audio data-key="68" src="sounds/dove.wav"></audio>
+  <audio data-key="70" src="sounds/falcon.wav"></audio>
+  <audio data-key="71" src="sounds/gull.wav"></audio>
+  <audio data-key="72" src="sounds/hawk.wav"></audio>
+  <audio data-key="77" src="sounds/merlin.wav"></audio>
+  <audio data-key="79" src="sounds/owl.wav"></audio>
+  <audio data-key="80" src="sounds/peacock.wav"></audio>
+
+<script>
+
+  function playSound(e){
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    if(!audio)return; //stop the function
+    audio.currentTime = 0; //rewind to the start
+    audio.play();
+    key.classList.add('playing');
+  };
+
+  function removeTransition(e){
+    if(e.propertyName !== 'transform') return; //skip if it's not a transform
+    this.classList.remove('playing');
+  }
+
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown',playSound);
+</script>
+
+
+</body>
+</html>
