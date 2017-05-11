@@ -5,7 +5,7 @@
   <title>JS + CSS Clock</title>
 </head>
 <body>
-
+<nav><a href="one.html">1</a><a href="two.html">2</a></nav>
 
     <div class="clock">
       <div class="clock-face">
@@ -17,8 +17,13 @@
 
 
   <style>
+    a {
+      color: white;
+      text-decoration: none;
+      padding: 20px;
+    }
     html {
-      background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+      background:grey;
       background-size:cover;
       font-family:'helvetica neue';
       text-align: center;
@@ -59,7 +64,7 @@
     .hand {
       width:50%;
       height:6px;
-      background:black;
+      background:white;
       position: absolute;
       top:50%;
       transform-origin: 100%;
@@ -84,18 +89,18 @@
     const hours = now.getHours();
 
     const secondsDegrees = ((seconds/60)*360)+90;
-    const minsDegrees = ((seconds/60)*360)+90;
-    const hoursDegrees = ((seconds/12)*360)+90;
-    secondHand.style.transform = 'rotate(${secondsDegrees}deg)';
-    minHand.style.transform = 'rotate(${minsDegrees}deg)';
-    hourHand.style.transform = 'rotate(${hoursDegrees}deg)';
+    const minsDegrees = ((mins/60)*360)+90;
+    const hoursDegrees = ((hours/12)*360)+ ((mins/60)*30) + 90;
 
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+    minHand.style.transform = `rotate(${minsDegrees}deg)`;
+    hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
   }
 
   setInterval(setDate, 1000);
 
   setDate();
 
-  </script>
+</script>
 </body>
 </html>
